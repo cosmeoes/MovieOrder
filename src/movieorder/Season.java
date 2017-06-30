@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -79,21 +81,14 @@ public class Season {
           String stringSeasonNumer;
           int season=0;
         for(Episode e: episodes){
-           
-            if(e.getName().matches(".+[\\d][\\W-xeEX&&\\S][\\d][\\d].*")){
-              
-                stringSeasonNumer=e.getName().split("[\\W-xeEX&&\\S][\\d][\\d]")[0];
-                season=Integer.parseInt(stringSeasonNumer.charAt(stringSeasonNumer.length()-1)+"");
-               
-            }else if(e.getName().matches(".+[\\d][\\W-xeEX&&\\S][\\d].+")){
-                
-                stringSeasonNumer=e.getName().split("[\\W-xeEX&&\\S][\\d]")[0];
-                season=Integer.parseInt(stringSeasonNumer.charAt(stringSeasonNumer.length()-1)+"");
-             
+            Pattern pattern = Pattern.compile("(.+)([\\d]{1,3})([\\W-xeEX&&\\S])([\\d][\\d])(.*)");
+            Matcher matcher = pattern.matcher(e.getName());
+            if(matcher.matches()){
+                stringSeasonNumer = matcher.group(2);
+                season = Integer.parseInt(stringSeasonNumer);
             }else {
-               season=1;
+                 season =1;   
             }
-            
             
             int index=season;
             if (seasons.size()<=season){

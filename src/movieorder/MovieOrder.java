@@ -158,7 +158,6 @@ public class MovieOrder extends Application{
                             return;
                         }
                         toWrite += w + ("\n");
-                        
                     }
                     toWrite += f.getPath() + "\n";
 
