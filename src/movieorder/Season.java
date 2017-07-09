@@ -81,7 +81,7 @@ public class Season {
           String stringSeasonNumer;
           int season=0;
         for(Episode e: episodes){
-            Pattern pattern = Pattern.compile("(.+)([\\d]{1,3})([\\W-xeEX&&\\S])([\\d][\\d])(.*)");
+            Pattern pattern = Pattern.compile("(.+?)([\\d]{1,3})([\\W-xeEX&&\\S])([\\d][\\d])(.*)");
             Matcher matcher = pattern.matcher(e.getName());
             if(matcher.matches()){
                 stringSeasonNumer = matcher.group(2);

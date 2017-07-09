@@ -1,0 +1,6 @@
+/build
+build.xml
+dist/README.TXT
+manifest.mf
+nbproject/
+test/
