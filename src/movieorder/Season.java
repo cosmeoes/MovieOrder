@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -143,27 +143,20 @@ public class Season {
         Comparator<Episode> c= new Comparator<Episode>() {
             @Override
             public int compare(Episode o1, Episode o2) {
-                 int sEpisode1=0;
-                  int sEpisode2=0;
-                if(o1.getName().matches((".+[\\d][\\W-xeEX&&\\S][\\d][\\d].*"))){
-                    
-                   String stringSeasonNumer=o1.getName().split("[\\W-xeEX&&\\S][\\d][\\d]")[0];
-                   sEpisode1=Integer.parseInt(stringSeasonNumer.charAt(stringSeasonNumer.length()-1)+"");
-               
-                }else if(o1.getName().matches(".+[\\d][\\W-xeEX&&\\S][\\d].*")){
-                    
-                   String stringSeasonNumer=o1.getName().split("[\\W-xeEX&&\\S][\\d]")[0];
-                   sEpisode1=Integer.parseInt(stringSeasonNumer.charAt(stringSeasonNumer.length()-1)+"");
-                }
+                int sEpisode1=0;
+                int sEpisode2=0;
+                Pattern pattern = Pattern.compile("(.+?)([\\d]{1,3})([\\W-xeEX&&\\S])([\\d][\\d])(.*)");
+                Matcher matcherE1 = pattern.matcher(o1.getName());
                 
-                  if(o2.getName().matches((".+[\\d][\\W-xeEX&&\\S][\\d][\\d].*"))){
-                   String stringSeasonNumer=o2.getName().split("[\\W-xeEX&&\\S][\\d][\\d]")[0];
-                   sEpisode2=Integer.parseInt(stringSeasonNumer.charAt(stringSeasonNumer.length()-1)+"");
+                if(matcherE1.matches()){
+                   String stringSeasonNumer= matcherE1.group(2);
+                   sEpisode1=Integer.parseInt(stringSeasonNumer);
                
-                }else if(o2.getName().matches(".+[\\d][\\W-xeEX&&\\S][\\d].*")){
-                    
-                   String stringSeasonNumer=o2.getName().split("[\\W-xeEX&&\\S][\\d]")[0];
-                   sEpisode2=Integer.parseInt(stringSeasonNumer.charAt(stringSeasonNumer.length()-1)+"");
+                }
+                Matcher matcherE2 = pattern.matcher(o2.getName());
+                if(matcherE2.matches()){
+                   String stringSeasonNumer=matcherE2.group(2);
+                   sEpisode2=Integer.parseInt(stringSeasonNumer);
                 }
                return sEpisode1-sEpisode2;
                
